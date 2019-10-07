@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<block name="include"><include file="Public:header" /></block>
+<body class="ecommerce">
+
+  
+    <block name="include"><include file="Public:nav" /></block>
+   
+    <div class="main">
+      <div class="container">
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        
+        
+        <div class="row margin-bottom-40">
+            <!-- BEGIN CONTENT -->
+          <div class="col-md-12 col-sm-12">
+            <h1 style="color: #333">购物车</h1>
+            <div class="goods-page">
+              <div class="goods-data clearfix">
+                <div class="table-wrapper-responsive">
+                <table class="shopint cart">
+                  <tr>
+                    <th class="goods-page-image">图片</th>
+                    <th class="goods-page-description">商品</th>
+                    <th class="goods-page-quantity">数量</th>
+                    <th class="goods-page-price">单价</th>
+                    <th class="goods-page-total" colspan="2">总价</th>
+                  </tr>
+                  
+                </table>
+                </div>
+
+                <div class="shopping-total">
+                  <ul>
+                    <li class="shopping-total-price">
+                      <em>共计</em>
+                      <strong class="price"><span>$</span>50.00</strong>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <button class="btn btn-primary checkoutbtn" type="submit">提交 <i class="fa fa-check"></i></button>
+            </div>
+          </div>
+        </div>
+        <block name="include"><include file="Public:footer" /></block>
+
+        <script>
+            $(".checkoutbtn").click(function(){
+                if($(".shopping-total-price .price").text() == '$0'){
+                    alert("您的购物车为空哦");
+                }else{
+                    window.location.href = "/mall/?a=checkout";
+                }
+
+                
+            })
+        </script>
+</body>
+</html>

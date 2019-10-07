@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<block name="include"><include file="Public:header" /></block>
+<body class="ecommerce">
+    <block name="include"><include file="Public:nav" /></block>
+   
+    <div class="main">
+      <div class="container">
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        
+        
+        <div class="row margin-bottom-40">
+            <!-- BEGIN CONTENT -->
+          <div class="col-md-12 col-sm-12">
+            <div class="goods-page">
+              <div class="goods-data clearfix">
+                <div class="table-wrapper-responsive">
+                <table  class= "shopping cart" summary="Shopping cart">
+                  <!-- <tr>
+                    <th class="goods-page-image">订单编号</th>
+                    <th class="goods-page-description">购买清单</th>
+                    <th class="goods-page-description">下单时间</th>
+                    <th class="goods-page-description">收货地址</th>
+                    <th class="goods-page-total" colspan="2">总价</th>
+                  </tr> -->
+
+
+                  <!-- <volist name="result" id="vo" empty="暂时没有订单" >
+                      
+                  </volist> -->
+                
+                  
+
+                </table>
+                </div>
+
+                <div class="shopping-total">
+                  <ul>
+                    <li class="shopping-total-price">
+                      <em>共<span class="count"></span>条订单</em>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <a href="/mall" class="btn btn-primary" type="submit">去买买买 </i></a>
+              <a href="/mall/?a=excel" class="btn btn-primary" type="submit">导出excel表格</i></a>
+            </div>
+          </div>
+        </div>
+        <block name="include"><include file="Public:footer" /></block>
+
+        <script>
+            getOrder();
+            function getOrder(){
+              $(".shopping.cart").html('');
+
+
+               $.get("http://localhost/mall/?a=getOrder", function(data, status){
+                 var res =JSON.parse(data);
+                  console.log(res);
+
+                  //订单数量
+                  var count= res.length;
+                  var table='<tr><th class="goods-page-image">订单编号</th><th class="goods-page-description">购买清单</th><th class="goods-page-description">下单时间</th><th class="goods-page-description">收货地址</th><th class="goods-page-total" colspan="2">总价</th></tr>'
+                 
+                  var str= '';
+                  res.address
+
+                  for(var i=0;i<res.length;i++){
+                      console.log(res[i]);
+                      var m = res[i].details.split(",")
+                      m.pop()
+
+                      var a = res[i].address.split(",")
+                      var a1= a[0];
+                      var a2= a[1];
+
+                      var titlestr='';
+                      str +=  '<tr><td class="goods-page-image"> 001089'+res[i].id+'</td><td class="goods-page-description">';
+                      for (let index = 0; index < m.length; index++) {
+                         titlestr += '<h3><a>'+m[index]+'</a></h3>';
+                      }
+                      str += titlestr+'</td><td class="goods-page-quantity">'+res[i].datatime+'</td>'+'<td class="goods-page-quantity">'+a1+'</br>'+a2+'</td><td class="goods-page-total"><strong><span>$</span>'+res[i].total+'</strong></td></tr>'
+                  }
+
+                  $(".shopping.cart").html(table+str);
+
+                  $(".count").html(count);
+
+                  
+
+
+                  
+
+               });
+            }
+        </script>
+</body>
+</html>

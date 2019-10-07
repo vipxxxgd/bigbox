@@ -1,0 +1,39 @@
+<!-- Hello gakiw~
+<foreach name="arr" item="vo">
+    {$vo}
+</foreach> -->
+<!DOCTYPE html>
+<html lang="en">
+    <!--公共头部-->
+    <block name="include"><include file="Public:header" /></block>
+<body class="ecommerce">
+    <block name="include"><include file="Public:nav" /></block>
+    <div class="main">
+      <div class="container">
+        <div class=" margin-bottom-40">
+          <div class=" sale-product">
+            <h2>商品列表</h2>
+            <div class="">
+                <volist name="result" id="vo" empty="暂时没有商品" >
+                    <div class="col-md-3">
+                        <div class="product-item">
+                          <div class="pi-img-wrapper">
+                            <img src="./picture/{$vo[imgs][0]}" class="img-responsive" alt="{$vo.name}">
+                          </div>
+                          <h3><a href="./?a=goods&id={$vo.id}">{$vo.name}</a></h3>
+                          <div class="pi-price">{$vo.price}</div>
+                          <a  onclick="addCar('{$vo.id}')" class="btn btn-default add2cart">Add to cart</a>
+                        </div>
+                      </div>
+                </volist>
+          
+            </div>
+          </div>
+          <!-- END SALE PRODUCT -->
+        </div>
+        <!--公共尾部-->
+        <block name="include"><include file="Public:footer" /></block>
+
+        
+</body>
+</html>
